@@ -60,8 +60,6 @@ class JSONStorage
 		try {
 			return JSON.parse(json);
 		} catch (e) {
-			// TODO
-			alert("GET failed: " + key)
 			console.log("Failed to parse: " + json);
 		}
 	}
@@ -77,8 +75,6 @@ class JSONStorage
 		try {
 			localStorage.setItem(key, value);
 		} catch(e) {
-			// TODO
-			alert("SET failed: " + key)
 			console.log("Failed to write to localStorage");
 		}
 	}

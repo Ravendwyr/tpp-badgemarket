@@ -1,0 +1,140 @@
+
+body {
+	font-family: "Arial";
+	font-size: 13px;
+	max-width: max-content;
+	margin: auto;
+}
+
+td {
+	padding: 0;
+}
+
+button {
+	font-size: 13px;
+	background-color: #e9e9ed; /* #efefef */
+	border: 1px solid #8f8f9d; /* #767676 */
+	border-radius: 4px;
+	padding: 2px 5px;
+	margin: 1px;
+	height: 23px;
+}
+
+button:hover {
+	filter: brightness(0.9);
+}
+
+button:active {
+	filter: brightness(0.8);
+}
+
+input {
+	font-size: 13px;
+	border: 1px solid #888;
+	border-radius: 3px;
+	line-height: 1em;
+	height: 17px;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 200px;
+	background-color: #333d;
+	color: #fff;
+	text-align: center;
+	padding: 2px 2px;
+	border-radius: 3px;
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.row-odd {
+	background-color: #fff;
+}
+
+.row-even {
+	background-color: #eee;
+}
+
+.header {
+	text-align: center;
+	background-color: #ddd;
+	padding: 2px;
+}
+
+.toggle-checked {
+	color: #000;
+	border: 1px solid #aaa;
+}
+
+.toggle-unchecked {
+	color: #aaa;
+	border: 1px solid #aaa;
+}
+
+.user-button {
+	line-height: 1em;
+	height: 21px;
+	margin: 0;
+}
+
+.user-checkbox {
+	margin: 0px 3px 3px 0px;
+}
+
+
+html.dark body {
+	background-color: #000;
+	color: #eee;
+}
+
+html.dark button {
+	background-color: #222;
+	color: #fff;
+}
+
+html.dark input {
+	background-color: #111;
+	color: #eee;
+	border: 1px solid #555;
+}
+
+html.dark .header {
+	background-color: #444;
+	color: #fff;
+}
+
+html.dark .row-odd {
+	background-color: #000;
+}
+
+html.dark .row-even {
+	background-color: #222;
+}
+
+html.dark .toggle-checked {
+	color: #fff;
+}
+
+html.dark .toggle-unchecked {
+	color: #777;
+	border: 1px solid #555;
+}
+
+html.dark .tooltip {
+	border-bottom: 1px dotted #ddd;
+}
+
+html.dark .tooltip .tooltiptext {
+	border: 1px solid #888;
+}

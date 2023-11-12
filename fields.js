@@ -103,7 +103,7 @@ const table_field_builder_owned = user => {
 			}
 			
 			if (owned) {
-				if (form.checkbox_owned_list.checked) {
+				if (form.checkbox_owned_list.data_checked) {
 					show_list();
 				} else {
 					show_count();

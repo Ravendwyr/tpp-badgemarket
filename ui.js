@@ -162,17 +162,19 @@ function filter_badge(badge)
 	return true;
 }
 
-function create_toggle(label)
+function create_toggle(label, checked, on_changed)
 {
 	const toggle = dom.button(label);
-	toggle.data_checked = true;
+	toggle.data_checked = checked;
 	
 	function change_style()
 	{
 		if (toggle.data_checked) {
-			toggle.style.color = "#000";
+			toggle.classList.add("toggle-checked");
+			toggle.classList.remove("toggle-unchecked");
 		} else {
-			toggle.style.color = "#aaa";
+			toggle.classList.add("toggle-unchecked");
+			toggle.classList.remove("toggle-checked");
 		}
 	}
 	
@@ -180,7 +182,7 @@ function create_toggle(label)
 	toggle.onclick = debug(() => {
 		toggle.data_checked = !toggle.data_checked;
 		change_style();
-		rebuild_table(true);
+		on_changed();
 	});
 	
 	toggle.set_value = value => {
@@ -227,6 +229,7 @@ function build_user_form()
 		user.apply_style(td_username);
 		
 		const checkbox_enabled = dom.elem("input", { type: "checkbox" });
+		checkbox_enabled.classList.add("user-checkbox");
 		checkbox_enabled.checked = user.enabled;
 		checkbox_enabled.onchange = debug(() => {
 			user.enabled = checkbox_enabled.checked;
@@ -249,6 +252,7 @@ function build_user_form()
 		});
 		
 		const button_delete = dom.button("×");
+		button_delete.classList.add("user-button");
 		button_delete.onclick = debug(() => {
 			if (confirm("Delete " + user.username + "?")) {
 				users.splice(users.indexOf(user), 1);
@@ -341,35 +345,30 @@ function build_form()
 	container.style.maxWidth = "max-content";
 	container.style.margin = "auto";
 	
-	const header_style = {
-		textAlign: "center",
-		backgroundColor: "#ddd",
-		padding: "2px",
-	};
-	
 	const td_queries_header = dom.td(
 		add_tooltip(
 			dom.span("Badge API"),
 			"Click Refresh to fetch badge data from the API. The data will appear in the table below. Add users to fetch badges owned by a user."
 		),
-		{ style: header_style },
 	);
+	td_queries_header.classList.add("header");
 	
 	const td_users_header = dom.td(
 		add_tooltip(
 			dom.span("User List"),
 			"Enter a Twitch username to add a user. You can fetch badges owned by a user, which will appear as a field in the table below."
 		),
-		{ style: header_style },
 	);
+	td_users_header.classList.add("header");
 	
 	const td_filter_header = dom.td(
 		add_tooltip(
 			dom.span("Badge Table"),
 			"Toggle the buttons to filter badges by generation/game. Click on a field header to sort badges by that field. Reclick to reverse the order."
 		),
-		{ colspan: 2, style: header_style },
+		{ colspan: 2 },
 	);
+	td_filter_header.classList.add("header");
 	
 	const td_queries = dom.td();
 	
@@ -383,12 +382,23 @@ function build_form()
 	const input_max_offers = dom.elem("input", { size: 2, value: "5" });
 	input_max_offers.onchange = debug(() => rebuild_table());
 	
-	const checkbox_owned_list = dom.elem("input", { type: "checkbox" });
-	checkbox_owned_list.onchange = debug(() => rebuild_table());
+	const checkbox_owned_list = create_toggle(
+		"List owned badges",
+		false,
+		() => rebuild_table(),
+	);
+	
+	const button_dark_mode = create_toggle(
+		"Dark mode",
+		false,
+		() => document.documentElement.classList.toggle("dark"),
+	);
 	
 	const td_settings = dom.td([
-		input_max_offers, "# of buy/sell offers shown",
-		checkbox_owned_list, "List owned badges",
+		input_max_offers,
+		"# of buy/sell offers shown",
+		checkbox_owned_list,
+		button_dark_mode,
 	], { colspan: 2 });
 	
 	const td_filter = dom.td({ colspan: 2 });
@@ -401,7 +411,7 @@ function build_form()
 	
 	for (const group of gen_groups) {
 		for (const gen of group) {
-			generation_form[gen] = create_toggle(gen);
+			generation_form[gen] = create_toggle(gen, true, () => rebuild_table(true));
 		}
 		
 		const button_all = dom.button("All");
@@ -565,7 +575,7 @@ function rebuild_table(keep_trs)
 	// Add table rows from the index
 	for (let i = 0; i < index.length; ++i) {
 		const badge = index[i];
-		badge.tr.style.backgroundColor = i % 2 ? "#fff" : "#eee";
+		badge.tr.className = i % 2 ? "row-odd" : "row-even";
 		table.appendChild(badge.tr);
 	}
 	

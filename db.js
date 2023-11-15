@@ -33,7 +33,7 @@ const db = new function()
 		if (num <= 721) return 6;
 		if (num <= 809) return 7;
 		if (num <= 905) return 8;
-		if (num <= 1017) return 9;
+		if (num <= 1018) return 9;
 		return "misc";
 	}
 	

@@ -406,7 +406,7 @@ function build_form()
 	
 	const gen_groups = [
 		[1, 2, 3, 4, 5, 6, 7, 8, 9],
-		["misc", "sirius", "vega", "blazing", "spaceworld", "xgremix", "star", "snakewood"],
+		["misc", "sirius", "vega", "blazing", "spaceworld", "xgremix", "star", "snakewood", "kep"],
 	];
 	
 	for (const group of gen_groups) {

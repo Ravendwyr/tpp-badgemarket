@@ -56,9 +56,10 @@ const table_field_count = {
 		return td;
 	},
 	sorter: (a, b) => {
-		if (a.count === null) return 0;
-		if (a.count < b.count) return -1;
-		if (a.count > b.count) return 1;
+		const a_count = a.count || 0;
+		const b_count = b.count || 0;
+		if (a_count < b_count) return -1;
+		if (a_count > b_count) return 1;
 		return 0;
 	}
 };

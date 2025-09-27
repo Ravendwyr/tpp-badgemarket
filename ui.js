@@ -281,8 +281,8 @@ function build_user_form()
 
 function build_add_user_form()
 {
-	const input_add_user = dom.elem("input", { size: 12, placeholder: "Twitch username" });
-	const button_add_user = dom.button("Add user");
+	const input_add_user = dom.elem("input", { size: 12, placeholder: "TPP chat name" });
+	const button_add_user = dom.button("Add chatter");
 	
 	button_add_user.onclick = debug_async(async () => {
 		const username = input_add_user.value.trim();
@@ -348,7 +348,7 @@ function build_form()
 	const td_queries_header = dom.td(
 		add_tooltip(
 			dom.span("Badge API"),
-			"Click Refresh to fetch badge data from the API. The data will appear in the table below. Add users to fetch badges owned by a user."
+			"Click Refresh to fetch badge data from the API. The data will appear in the table below. Add chatters to fetch badges owned by a chatter."
 		),
 	);
 	td_queries_header.classList.add("header");
@@ -356,7 +356,7 @@ function build_form()
 	const td_users_header = dom.td(
 		add_tooltip(
 			dom.span("User List"),
-			"Enter a Twitch username to add a user. You can fetch badges owned by a user, which will appear as a field in the table below."
+			"Enter a TPP chat name to add a chatter. You can fetch badges owned by a chatter, which will appear as a field in the table below."
 		),
 	);
 	td_users_header.classList.add("header");
